@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_videoclub_aitor_videoclub_jefe,Jefe de Pelis,videoclub_aitor.model_videoclub_pelis,videoclub_jefe,1,1,1,1
+access_videoclub_aitor_videoclub_becario,Becario de Pelis,videoclub_aitor.model_videoclub_pelis,videoclub_becario,1,1,0,0
+access_videoclub_aitor_videoclub_jefe_categoria,Jefe de Categorías,videoclub_aitor.model_videoclub_categoria,videoclub_jefe,1,1,1,1

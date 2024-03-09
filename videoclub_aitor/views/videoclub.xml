@@ -1,0 +1,186 @@
+<odoo>
+    <data>
+        <!-- Definición explícita de la vista de lista -->
+        <record model="ir.ui.view" id="videoclub_aitor.pelis_arbol">
+            <field name="name">videoclub_aitor.pelis_arbol</field>
+            <field name="model">videoclub.pelis</field>
+            <field name="arch" type="xml">
+                <!-- Arquitectura de la vista -->
+                <tree>
+                    <field name="titulo" />
+                    <field name="director" />
+                    <field name="compania" />
+                    <field name="clasificacion" />
+                    <field name="presupuesto" />
+                    <field name="fechaestreno" />
+                    <field name="categoria_id" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Definición explícita de la vista de formulario -->
+        <record model="ir.ui.view" id="videoclub_aitor.pelis_formulario">
+            <field name="name">videoclub_aitor.pelis_formulario</field>
+            <field name="model">videoclub.pelis</field>
+            <field name="arch" type="xml">
+                <form string="Películas">
+                    <group string="Datos de Películas">
+                        <field name="titulo" />
+                        <field name="director" />
+                        <field name="compania" />
+                        <field name="clasificacion" />
+                        <field name="presupuesto" />
+                        <field name="fechaestreno" />
+                        <field name="categoria_id" />
+                        <field name="imagen" widget="image" options='{"resize": [100, 100]}' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana -->
+        <record model="ir.actions.act_window" id="videoclub_aitor.pelis_ventana">
+            <field name="name">Películas</field>
+            <field name="res_model">videoclub.pelis</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <h1>VIDEOCLUB</h1>
+                <p>Lista de películas vacía</p>
+            </field>
+        </record>
+
+        <!-- Elemento de menú superior -->
+        <menuitem name="VIDEOCLUB" id="videoclub_aitor.menu_root" />
+
+        <!-- Categorías de menú -->
+        <menuitem name="Gestión de Películas" id="videoclub_aitor.gestion_pelis"
+            parent="videoclub_aitor.menu_root" />
+        <menuitem name="Películas" id="videoclub_aitor.menu_pelis"
+            parent="videoclub_aitor.gestion_pelis"
+            action="videoclub_aitor.pelis_ventana" />
+
+        <!-- Vista Kanban -->
+        <record model="ir.ui.view" id="view_videoclub_pelis_kanban">
+            <field name="name">videoclub.pelis.kanban</field>
+            <field name="model">videoclub.pelis</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_image">
+                                    <field name="imagen" widget="image"
+                                        options='{"resize": [100, 100]}' />
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <label for="titulo" style="margin-right:6px">Título:</label>
+                                        <field name="titulo" />
+                                    </strong>
+                                    <div>
+                                        <label for="director" style="margin-right:6px">Director: </label>
+                                        <field name="director" />
+                                    </div>
+                                    <div>
+                                        <label for="compania" style="margin-right:6px"> Compañía: </label>
+                                        <field name="compania" />
+                                    </div>
+                                    <div>
+                                        <label for="clasificacion" style="margin-right:6px">
+                                            Clasificación: </label>
+                                        <field name="clasificacion" />
+                                    </div>
+                                    <div>
+                                        <label for="presupuesto" style="margin-right:6px">
+                                            Presupuesto: </label>
+                                        <field name="presupuesto" />
+                                    </div>
+                                    <div>
+                                        <label for="fechaestreno" style="margin-right:6px">Fecha de
+                                            estreno: </label>
+                                        <field name="fechaestreno" />
+                                    </div>
+                                    <div>
+                                        <label for="categoria_id" style="margin-right:6px">
+                                            Categorïa: </label>
+                                        <field name="categoria_id" />
+                                    </div>
+                                    <div class="text-muted">
+                                        <label for="subvencionado" style="margin-right:6px">
+                                            Subvencionado: </label>
+                                        <field name="subvencionado" />
+                                    </div>
+                                    <div class="text-muted">
+                                        <label for="invertido" style="margin-right:6px">Inversión: </label>
+                                        <field name="invertido" />
+                                    </div>
+                                    <div class="text-muted">
+                                        <label for="millonario" style="margin-right:6px">¿Más de un
+                                            millón?: </label>
+                                        <field name="millonario" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Acción de ventana -->
+        <record model="ir.actions.act_window" id="action_videoclub_pelis_kanban">
+            <field name="name">Películas Kanban</field>
+            <field name="res_model">videoclub.pelis</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+        <!-- Definición explícita de la vista de lista para videoclub.categoria -->
+        <record model="ir.ui.view" id="videoclub_aitor.categoria_arbol">
+            <field name="name">videoclub_aitor.categoria_arbol</field>
+            <field name="model">videoclub.categoria</field>
+            <field name="arch" type="xml">
+                <!-- Arquitectura de la vista -->
+                <tree>
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Definición explícita de la vista de formulario para videoclub.categoria -->
+        <record model="ir.ui.view" id="videoclub_aitor.categoria_formulario">
+            <field name="name">videoclub_aitor.categoria_formulario</field>
+            <field name="model">videoclub.categoria</field>
+            <field name="arch" type="xml">
+                <form string="Categoría de Película">
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana para videoclub.categoria -->
+        <record model="ir.actions.act_window" id="videoclub_aitor.categoria_ventana">
+            <field name="name">Categorías de Películas</field>
+            <field name="res_model">videoclub.categoria</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <h1>VIDEOCLUB</h1>
+                <p>Lista de categorías de películas</p>
+            </field>
+        </record>
+
+        <!-- Menú para la gestión de categorías -->
+        <menuitem name="Gestión de Categorías" id="videoclub_aitor.gestion_categorias"
+            parent="videoclub_aitor.menu_root" sequence="31" />
+
+        <!-- Submenú para la vista de árbol de categorías -->
+        <menuitem name="Categorías" id="videoclub_aitor.menu_categorias_tree"
+            parent="videoclub_aitor.gestion_categorias"
+            action="videoclub_aitor.categoria_ventana" />
+
+        
+    </data>
+</odoo>

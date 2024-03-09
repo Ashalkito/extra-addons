@@ -1,0 +1,210 @@
+<odoo>
+    <data>
+        <!-- Definición explícita de la vista de lista -->
+        <record model="ir.ui.view" id="promotions.promo_arbol">
+            <field name="name">promotions.promo_arbol</field>
+            <field name="model">promotions.promocion</field>
+            <field name="arch" type="xml">
+                <!-- Arquitectura de la vista -->
+                <tree>
+                    <field name="name" />
+                    <field name="descripcion" />
+                    <field name="descuento" />
+                    <field name="fechainicio" />
+                    <field name="clasificacion_id" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Definición explícita de la vista de formulario -->
+        <record model="ir.ui.view" id="promotions.promo_formulario">
+            <field name="name">promotions.promo_formulario</field>
+            <field name="model">promotions.promocion</field>
+            <field name="arch" type="xml">
+                <form string="Promociones">
+                    <group string="Datos de de la promoción">
+                        <field name="name" />
+                        <field name="descripcion" />
+                        <field name="descuento" />
+                        <field name="fechainicio" />
+                        <field name="clasificacion_id" />
+                        <field name="imagen" widget="image" options='{"resize": [100, 100]}' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana -->
+        <record model="ir.actions.act_window" id="promotions.promo_ventana">
+            <field name="name">Promociones</field>
+            <field name="res_model">promotions.promocion</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <h1>Promociones</h1>
+                <p>Lista de promociones</p>
+            </field>
+        </record>
+
+        <!-- Elemento de menú superior -->
+        <menuitem name="Promociones" id="promotions.menu_root" />
+
+        <!-- Categorías de menú -->
+        <menuitem name="Gestión de Promociones" id="promotions.gestion_promociones"
+            parent="promotions.menu_root" />
+        <menuitem name="Promociones" id="promotions.menu_promociones"
+            parent="promotions.gestion_promociones"
+            action="promotions.promo_ventana" />
+
+        <!-- Vista Kanban -->
+        <record model="ir.ui.view" id="view_promotions_promo_kanban">
+            <field name="name">promotions.promocion.kanban</field>
+            <field name="model">promotions.promocion</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_image">
+                                    <field name="imagen" widget="image"
+                                        options='{"resize": [100, 100]}' />
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <label for="name"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Nombre:</label>
+                                        <field name="name" />
+                                    </strong>
+                                    <div>
+                                        <label for="descripcion"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Descripción: </label>
+                                        <field name="descripcion" />
+                                    </div>
+                                    <div>
+                                        <label for="descuento"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Descuento (%): </label>
+                                        <field name="descuento" />
+                                    </div>
+                                    <div>
+                                        <label for="fechainicio"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Fecha de inicio: </label>
+                                        <field name="fechainicio" />
+                                    </div>
+                                    <div>
+                                        <label for="clasificacion_id"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Clasificación: </label>
+                                        <field name="clasificacion_id" />
+                                    </div>
+                                    <div>
+                                        <label for="pequeno"
+                                            style="margin-right:6px; color: rgb(113,99,158); font-weight: bold">
+                                            Tipo de descuento: </label>
+                                        <field name="pequeno" />
+                                        <field name="mediano" />
+                                        <field name="grande" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Acción de ventana -->
+        <record model="ir.actions.act_window" id="action_promotions_promocion_kanban">
+            <field name="name">Promociones Kanban</field>
+            <field name="res_model">promotions.promocion</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+        <!-- Definición explícita de la vista de lista para promotions.clasificacion -->
+        <record model="ir.ui.view" id="promotions.clasificacion_arbol">
+            <field name="name">promotions.clasificacion_arbol</field>
+            <field name="model">promotions.clasificacion</field>
+            <field name="arch" type="xml">
+                <!-- Arquitectura de la vista -->
+                <tree>
+                    <field name="name" />
+                    <field name="descripcion" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Definición explícita de la vista de formulario para promotions.clasificacion -->
+        <record model="ir.ui.view" id="promotions.clasificacion_formulario">
+            <field name="name">promotions.clasificacion_formulario</field>
+            <field name="model">promotions.clasificacion</field>
+            <field name="arch" type="xml">
+                <form string="Categoría de Clasificaciones">
+                    <group>
+                        <field name="name" />
+                        <field name="descripcion" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana para promotions.clasificacion -->
+        <record model="ir.actions.act_window" id="promotions.clasificacion_ventana">
+            <field name="name">Categorías de clasificaciones</field>
+            <field name="res_model">promotions.clasificacion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <h1>Promociones</h1>
+                <p>Lista de clasificaciones de promoción</p>
+            </field>
+        </record>
+
+        <!-- Menú para la gestión de clasificaciones -->
+        <menuitem name="Gestión de Categorías" id="promotions.gestion_clasificacion"
+            parent="promotions.menu_root" sequence="31" />
+
+        <!-- Submenú para la vista de árbol de categorías -->
+        <menuitem name="Categorías" id="promotions.menu_clasificacion_tree"
+            parent="promotions.gestion_clasificacion"
+            action="promotions.clasificacion_ventana" />
+
+        <!-- Aquí modifico el formulario de creación de objetos en el modelo product.template, y
+        pongo el nuevo campo bajo el precio de venta -->
+        <record id="view_product_template_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='list_price']" position="after">
+                        <label for="promocion_id">Promoción</label>
+                        <field name="promocion_id"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+        
+        <!-- Acción de ventana para la vista de lista de productos -->
+        <record model="ir.actions.act_window" id="action_product_template">
+            <field name="name">Productos</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <h1>Productos</h1>
+                <p>Lista de productos</p>
+            </field>
+        </record>
+
+        <!-- Menú para la gestión de productos -->
+        <menuitem name="Gestión de Productos" id="promotions.gestion_productos"
+            parent="promotions.menu_root" sequence="40" />
+
+        <!-- Submenú para la vista de árbol de productos -->
+        <menuitem name="Productos" id="promotions.menu_productos_tree"
+            parent="promotions.gestion_productos"
+            action="action_product_template" />
+
+    </data>
+</odoo>
